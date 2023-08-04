@@ -1,12 +1,15 @@
 # テーブル設計
 
-## user 　テーブル
+## users テーブル
 
-| Column             | Type   | Options                    |
-| ------------------ | ------ | -------------------------- |
-| nickname           | string | null: false, unique: true  |
-| email              | string | null: false                |
-| password           | string | null: false                |
+| Column                | Type     | Options                    |
+| --------------------- | -------  | -------------------------- |
+| nickname              | string   | null: false                |
+| email                 | string   | null: false                |
+| password_confirmation | string   | null: false                |
+| first_name            | string   | null: false                |
+| last_name             | string   | null: false                |
+| birthday              | datetime | null: false                |
 
 has_many: items
 has_many: orders
@@ -15,38 +18,40 @@ has_many: orders
 
 | Column             | Type        | Options                        |
 | ------------------ | ----------- | ------------------------------ |
-| item name          | string      | null: false                    |
+| item_name          | string      | null: false                    |
 | price              | integer     | null: false                    |
 | description        | text        | null: false                    |
-| condition          | string      | null: false                    |
-| category           | string      | null: false                    |
-| seller             | string      | null: false                    |
-| user_id            | references  | null: false, foreign_key: true |
+| condition          | integer     | null: false                    |
+| category           | integer     | null: false                    |
+| postage            | integer     | null: false                    |
+| region             | integer     | null: false                    |
+| shipping_date      | integer     | null: false                    |
+| user               | references  | null: false, foreign_key: true |
 
-belongs_to :users
+belongs_to :user
 has_one :orders 
 
 
 ## orders テーブル
 
-| Column             | Type       | Options                            |
-| ------------------ | ---------- | ---------------------------------- |
-| buyer              | string     | null: false                        |
-| item               | string     | null: false                        |
-| user_id            | references | null: false, foreign_key: true     |
-| item_id            | string     | null: false, foreign_key: true     |
+| Column | Type       | Options                            |
+| -------| ---------- | ---------------------------------- |
+| user   | references | null: false, foreign_key           |
+| item   | references | null: false, foreign_key           |
 
-has_many : shipping information
+has_one :shipping_information
 
 
-## shipping information テーブル
+## shipping_information テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| postal code        | string | null: false |
-| region             | string | null: false |
-| city               | string | null: false |
-| addres No.         | string | null: false |
-| building           | string | null: false |
-| tel No.            | string | null: false |
-| name               | string | null:false  |
+| Column       | Type       | Options                  |
+| ------------ | ---------- | ------------------------ |
+| postal code  | string     | null: false              |
+| region       | integer    | null: false              |
+| city         | string     | null: false              |
+| address No.  | string     | null: false              |
+| building     | string     |                          |
+| tel No.      | string     | null: false              |
+| order        | references | null:false, foreign_key  |
+
+belongs_to :order
