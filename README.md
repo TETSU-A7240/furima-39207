@@ -5,11 +5,13 @@
 | Column                | Type     | Options                    |
 | --------------------- | -------  | -------------------------- |
 | nickname              | string   | null: false                |
-| email                 | string   | null: false                |
-| password_confirmation | string   | null: false                |
+| email                 | string   | null: false, unique: true  |
+| encrypted_password    | string   | null: false                |
 | first_name            | string   | null: false                |
 | last_name             | string   | null: false                |
-| birthday              | datetime | null: false                |
+| first_name_kana       | string   | null: false                |
+| last_name_kana        | string   | null: false                |
+| birthday              | date     | null: false                |
 
 has_many: items
 has_many: orders
@@ -21,15 +23,15 @@ has_many: orders
 | item_name          | string      | null: false                    |
 | price              | integer     | null: false                    |
 | description        | text        | null: false                    |
-| condition          | integer     | null: false                    |
-| category           | integer     | null: false                    |
-| postage            | integer     | null: false                    |
-| region             | integer     | null: false                    |
-| shipping_date      | integer     | null: false                    |
+| condition_id       | integer     | null: false                    |
+| category_id        | integer     | null: false                    |
+| postage_id         | integer     | null: false                    |
+| region_id          | integer     | null: false                    |
+| shipping_date_id   | integer     | null: false                    |
 | user               | references  | null: false, foreign_key: true |
 
 belongs_to :user
-has_one :orders 
+has_one :order 
 
 
 ## orders テーブル
@@ -40,18 +42,20 @@ has_one :orders
 | item   | references | null: false, foreign_key           |
 
 has_one :shipping_information
+belongs_to :user
+belongs_to :item
 
 
 ## shipping_information テーブル
 
-| Column       | Type       | Options                  |
-| ------------ | ---------- | ------------------------ |
-| postal code  | string     | null: false              |
-| region       | integer    | null: false              |
-| city         | string     | null: false              |
-| address No.  | string     | null: false              |
-| building     | string     |                          |
-| tel No.      | string     | null: false              |
-| order        | references | null:false, foreign_key  |
+| Column         | Type       | Options                  |
+| -------------- | ---------- | ------------------------ |
+| postal code    | string     | null: false              |
+| region_id      | integer    | null: false              |
+| city           | string     | null: false              |
+| address_number | string     | null: false              |
+| building       | string     |                          |
+| tel_number     | string     | null: false              |
+| order          | references | null:false, foreign_key  |
 
 belongs_to :order
