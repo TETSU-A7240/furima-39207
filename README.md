@@ -50,7 +50,7 @@ belongs_to :item
 
 | Column         | Type       | Options                  |
 | -------------- | ---------- | ------------------------ |
-| postal code    | string     | null: false              |
+| postal_code    | string     | null: false              |
 | region_id      | integer    | null: false              |
 | city           | string     | null: false              |
 | address_number | string     | null: false              |
