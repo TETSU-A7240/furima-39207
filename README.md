@@ -46,7 +46,7 @@ belongs_to :user
 belongs_to :item
 
 
-## shipping_information テーブル
+## shipping_informations テーブル
 
 | Column         | Type       | Options                  |
 | -------------- | ---------- | ------------------------ |
