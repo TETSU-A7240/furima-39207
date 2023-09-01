@@ -1,21 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Item, type: :model do
-  describe "ユーザー新規登録" do
+
+  describe "商品新規登録" do
     before do
-      @item = FactoryBot.build(:item)
+      @item = FactoryBot.create(:item)
     end
-    
+
     context '商品が出品できるとき' do
       it '全ての項目が正しく入力されている場合' do
-        @item = FactoryBot.build(:item)
+        @item = FactoryBot.create(:item)
         expect(item).to be_valid
       end
     end
 
+
     context '商品が出品できないとき' do
       it "画像がないと登録できない" do
-        @item.image = '' 
+        @item.image = nil 
         @item.valid?
         expect(@item.errors.full_messages).to include "Image name can't be blank"
       end
@@ -55,7 +57,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include "Shipping date Select"
       end
       it "価格が空だと登録できない" do
-        @item.price_id = '' 
+        @item.price = '' 
         @item.valid?
         expect(@item.errors.full_messages).to include "Price can't be blank"
       end
@@ -76,5 +78,7 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Price must be a valid number"
       end
-
+    end
+  end
 end
+
