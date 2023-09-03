@@ -9,7 +9,6 @@ RSpec.describe Item, type: :model do
 
     context '商品が出品できるとき' do
       it '全ての項目が正しく入力されている場合' do
-       # @item = FactoryBot.create(:item)
         expect(@item).to be_valid
       end
     end
@@ -59,7 +58,7 @@ RSpec.describe Item, type: :model do
       it "価格が空だと登録できない" do
         @item.price = '' 
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price must be between ¥300 and ¥9,999,999", "Price must be a valid number"
+        expect(@item.errors.full_messages).to include "Price can't be blank", "Price must be between ¥300 and ¥9,999,999"
       end
       it "価格が¥300未満だと登録できない" do
         @item.price = 299
