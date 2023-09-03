@@ -59,7 +59,7 @@ RSpec.describe Item, type: :model do
       it "価格が空だと登録できない" do
         @item.price = '' 
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price can't be blank"
+        expect(@item.errors.full_messages).to include "Price must be between ¥300 and ¥9,999,999", "Price must be a valid number"
       end
       it "価格が¥300未満だと登録できない" do
         @item.price = 299
@@ -77,6 +77,36 @@ RSpec.describe Item, type: :model do
         @item.price = '１２３４５'
         @item.valid?
         expect(@item.errors.full_messages).to include "Price must be between ¥300 and ¥9,999,999"
+      end
+
+      it 'カテゴリーが「---」の場合は出品できない' do
+        item = FactoryBot.build(:item, category_id: 1)
+        expect(item).not_to be_valid
+      end
+      
+      it '商品の状態が「---」の場合は出品できない' do
+        item = FactoryBot.build(:item, condition_id: 1)
+        expect(item).not_to be_valid
+      end
+      
+      it '配送料の負担が「---」の場合は出品できない' do
+        item = FactoryBot.build(:item, postage_id: 1)
+        expect(item).not_to be_valid
+      end
+      
+      it '発送元の地域が「---」の場合は出品できない' do
+        item = FactoryBot.build(:item, region_id: 1)
+        expect(item).not_to be_valid
+      end
+      
+      it '発送までの日数が「---」の場合は出品できない' do
+        item = FactoryBot.build(:item, shipping_date_id: 1)
+        expect(item).not_to be_valid
+      end
+      
+      it 'userが紐付いていなければ出品できない' do
+        item = FactoryBot.build(:item, user: nil)
+        expect(item).not_to be_valid
       end
     end
   end

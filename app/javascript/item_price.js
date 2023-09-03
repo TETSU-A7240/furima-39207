@@ -7,6 +7,5 @@
       const tax = Math.floor(priceInput.value * 0.1);
       const addProfitDom = document.getElementById("profit");
       addProfitDom.innerHTML = Math.floor(priceInput.value - tax);
-      console.log(inputValue);
     });
   });
