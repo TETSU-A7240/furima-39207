@@ -80,32 +80,38 @@ RSpec.describe Item, type: :model do
 
       it 'カテゴリーが「---」の場合は出品できない' do
         @item.category_id = 1
-        expect(@item).not_to be_valid
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       
       it '商品の状態が「---」の場合は出品できない' do
         @item.condition_id = 1
-        expect(@item).not_to be_valid
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       
       it '配送料の負担が「---」の場合は出品できない' do
         @item.postage_id = 1
-        expect(@item).not_to be_valid
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Postage can't be blank")
       end
       
       it '発送元の地域が「---」の場合は出品できない' do
         @item.region_id = 1
-        expect(@item).not_to be_valid
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Region can't be blank")
       end
       
       it '発送までの日数が「---」の場合は出品できない' do
         @item.shipping_date_id = 1
-        expect(@item).not_to be_valid
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping date can't be blank")
       end
       
       it 'userが紐付いていなければ出品できない' do
         @item.user = nil
-        expect(@item).not_to be_valid
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
       end
     end
   end

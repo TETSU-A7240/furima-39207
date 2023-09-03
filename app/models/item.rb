@@ -15,7 +15,7 @@ class Item < ApplicationRecord
   validates :description, presence: true
   validates :price, presence: true
 
-  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
+  validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :condition_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :postage_id, numericality: { other_than: 1 , message: "can't be blank"}
   validates :region_id, numericality: { other_than: 1 , message: "can't be blank"}
