@@ -23,7 +23,7 @@ def show
 end
 
 def edit
-  if current_user != @item.user
+  if current_user != @item.user || (@item.user == @item.user && @item.orders.exists?)
     redirect_to root_path
   end
 end
