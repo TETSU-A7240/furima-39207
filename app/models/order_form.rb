@@ -9,12 +9,13 @@ class OrderForm
     validates :city
     validates :address_number
     validates :tel_number, format: { with: /\A\d{10,11}\z/,message: "is invalid. Include hyphen(-)"}
+    validates :user_id
     validates :token
   end
 
   def save(user_id)
     item = Item.find(item_id)
-    order = item.orders.create(user_id: user_id)
+    order = Order.create(user_id: user_id, item_id: item_id)
     ShippingInformation.create(
       postal_code: postal_code,
       region_id: region_id,

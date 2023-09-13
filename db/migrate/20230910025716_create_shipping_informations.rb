@@ -5,7 +5,7 @@ class CreateShippingInformations < ActiveRecord::Migration[6.0]
       t.integer :region_id, null: false
       t.string :city,null: false
       t.string :address_number, null: false 
-      t.string :building, null: false 
+      t.string :building
       t.string :tel_number, null: false 
       t.references :order, null: false, foreign_key: true 
       t.timestamps
