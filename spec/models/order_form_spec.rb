@@ -29,7 +29,7 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
       end
       it '都道府県に「---」が選択されている場合は購入できないこと' do
-        @order_form.region_id = 0
+        @order_form.region_id = 1
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Region can't be blank")
       end
